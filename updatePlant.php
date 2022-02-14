@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="container">
-      <a class="btn btn-success btn-sm" href="home.php" role="button">Retour à l'Accueil</a><br><br/>
+      <a class="btn btn-success btn-sm" href="index.php" role="button">Retour à l'Accueil</a><br><br/>
         <!--   class="row  gy-2 gx-3 align-items-center"> -->
         <form method="post">
           <div class="col-md-4">
