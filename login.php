@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
           <!-- Email input -->
           <div class="form-outline mb-4">
             <label class="form-label">Username</label>
-            <input type="text" name="user" class="form-control form-control-lg"
+            <input type="text" name="user" autocomplete="off" class="form-control form-control-lg"
               placeholder="Enter a Username" />
           </div>
 
