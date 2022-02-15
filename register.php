@@ -2,26 +2,22 @@
 include 'connect.php';
 
 if (isset($_POST['submit'])) {
+  $user = $_POST['user'];
+  $pwd = $_POST['pwd'];
 
-  if ((isset($_POST['user'] && isset($_POST['pwd']))){
+  $psql = "SELECT * FROM \"MK\".\"User\" WHERE username='$user' AND password='$pwd'";
+  $result = pg_query($con,$psql);
 
-    $user = $_POST['user'];
-    $pwd = $_POST['pwd'];
-
-    $psql = "INSERT INTO \"MK\".\"User\"(username,password) VALUES('$user','$pwd')";
-    $result = pg_query($con,$psql);
-
-    if ($result) {
-      echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:green;">Nouvel utlisateur'.$user.' enregistrer!</p>';
-    } else {
-      echo 'Error failed to connect to the database :-(';
-    }
-
-    pg_close($con);
-
+  if (pg_num_rows($result)==1) {
+    session_start();
+    $_SESSION['auth']='true';
+    header('location:index.php');
   } else {
-    echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:red;">Veuillez remplir les champs username and password</p>';
-  }  
+    echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:red;">Username Or Password Incorrect</p>';
+  }
+
+  pg_close($con);
+  
 
 }
 
