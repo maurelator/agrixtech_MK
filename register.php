@@ -2,22 +2,26 @@
 include 'connect.php';
 
 if (isset($_POST['submit'])) {
-  $user = $_POST['user'];
-  $pwd = $_POST['pwd'];
 
-  $psql = "SELECT * FROM \"MK\".\"User\" WHERE username='$user' AND password='$pwd'";
-  $result = pg_query($con,$psql);
+  if ((isset($_POST['user'] && isset($_POST['pwd']))){
 
-  if (pg_num_rows($result)==1) {
-    session_start();
-    $_SESSION['auth']='true';
-    header('location:index.php');
+    $user = $_POST['user'];
+    $pwd = $_POST['pwd'];
+
+    $psql = "INSERT INTO \"MK\".\"User\"(username,password) VALUES('$user','$pwd')";
+    $result = pg_query($con,$psql);
+
+    if ($result) {
+      echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:green;">Nouvel utlisateur'.$user.' enregistrer!</p>';
+    } else {
+      echo 'Error failed to connect to the database :-(';
+    }
+
+    pg_close($con);
+
   } else {
-    echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:red;">Username Or Password Incorrect</p>';
-  }
-
-  pg_close($con);
-  
+    echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:red;">Veuillez remplir les champs username and password</p>';
+  }  
 
 }
 
@@ -42,11 +46,6 @@ if (isset($_POST['submit'])) {
   </div>
   <section class="vh-100"><br><br>
   <div class="container">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://borgenproject.org/wp-content/uploads/5366744359_d0ce558637_z.jpg" class="img-fluid"
-          alt="Sample image">
-      </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <h2>Login</h2><br>
         <form method="post">
@@ -64,11 +63,17 @@ if (isset($_POST['submit'])) {
               placeholder="Enter password" />
           </div>
 
+          <div class="form-outline mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" name="pwd" class="form-control form-control-lg"
+              placeholder="Enter password" />
+          </div>
+
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" name="submit" class="btn btn-success btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                class="link-primary">Register</a></p>
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Save</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Possedez vous deja un compte? <a href="#!"
+                class="link-primary">Login</a></p>
           </div>
 
         </form>

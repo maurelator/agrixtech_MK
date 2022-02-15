@@ -1,6 +1,12 @@
 <?php
 include 'connect.php';
 
+session_start();
+
+if (!$_SESSION['auth']) {
+  header("location:login.php");
+}
+
 ?>
 
 <!doctype html>
@@ -20,6 +26,9 @@ include 'connect.php';
 </head>
 
 <body>
+  <div class="container">
+    <a class="btn btn-outline-danger btn-sm" href="logout.php" role="button">Deconnexion</a>
+  </div>
   <div class="container">
     <div class="m-4">
       <ul class="nav nav-tabs" id="myTab">
