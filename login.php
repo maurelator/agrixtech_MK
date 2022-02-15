@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $_SESSION['auth']='true';
     header('location:index.php');
   } else {
-    echo '<p class="small fw-bold mt-2 pt-1 mb-0" style="color:red;">Username Or Password Incorrect</p>';
+    echo '<p style="color:red;">Username Or Password Incorrect</p>';
   }
 
   pg_close($con);
@@ -37,10 +37,8 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-  <div class="container">
     <h2 style="color:green;text-align: center;">Bienvenue sur AgrixTech</h2>
-  </div>
-  <section class="vh-100"><br><br>
+  <section class="vh-100"><br>
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
@@ -67,7 +65,7 @@ if (isset($_POST['submit'])) {
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" name="submit" class="btn btn-success btn-lg"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="register.php"
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="Register.php"
                 class="link-primary">Register</a></p>
           </div>
 
